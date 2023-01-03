@@ -1,0 +1,159 @@
+/*navbar*/
+.navbar{
+    height: 70px;
+    background-image: linear-gradient(0, #d0f5eb, #d3aef6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+}
+.navbar_logo{
+    width: 100px;
+}
+.navbar_login_logout{
+    display: flex;
+}
+.navbar_profile{
+    margin-left: 12px;
+}
+.navbar-nav{
+    position: relative;
+}
+.showCart{
+    height: 50vh;
+    overflow-y: auto;
+}
+body{
+    background-image: url("https://hoanghamobile.com/Content/2023/2023-bg-top.png");
+}
+.slide-items{
+    display: flex;
+    width: 100%;
+    margin-top: 70px;
+    height: 500px;
+    justify-content: space-between;
+}
+.slide-items-img{
+    height: 500px;
+    width: 100%;
+    width: 170px;
+}
+#count{
+    position: absolute;
+    background-color: #f1e2d5;
+    border-radius: 50%;
+    padding: 2px 8px;
+    top: -10px;
+    right: -10px;
+    font-size: 12px;
+    border: 1px solid #ffa17f;
+}
+
+/*container*/
+.container{
+
+    margin-top: 20px;
+
+}
+.navigation{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.menu_product{
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.menu_product-btn{
+    margin-right: 12px;
+}
+.navigation_menu{
+    display: flex;
+
+}
+.product-list{
+    margin-top: 12px;
+    border: 1px solid #cccccc;
+    background-color: white;
+    /*margin-left: 3px;*/
+    /*margin-right: 3px;*/
+}
+.cart{
+    position: relative;
+    margin-right: 16px;
+
+}
+.showCart{
+    z-index: 10;
+    position: absolute;
+    border-radius: 10px;
+    right: -7px;
+    top: 35px;
+    padding: 10px;
+    background-color: #cccccc;
+
+}
+.table{
+    width: 710px;
+    text-align: center;
+}
+.home-product{
+    margin-bottom: 12px;
+
+}
+/*#product{*/
+/*    background-color: white;*/
+/*}*/
+.card-body-img{
+    padding-bottom: 16px;
+}
+.img-fluide{
+    height: 300px;
+    width: 100%;
+}
+.cart-button{
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+#cart-img{
+    width: 50px;
+    height: 50px;
+}
+.quantity{
+    width: 40px;
+    /*margin-left: 150px;*/
+}
+.carousel-item{
+    height: 500px;
+}
+.d-block{
+    height: 500px;
+}
+/*upload product*/
+
+.rounded{
+    padding-top: 12px;
+}
+.table-product{
+    width: 100%;
+    margin-top: 12px;
+}
+.dropdown-menu{
+   left: -50px !important;
+}
+.list-items{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+.text-uppercase{
+    margin: 0;
+}
+.address{
+    margin: 0;
+}
+footer{
+    background-image: linear-gradient(0, #d0f5eb, #d3aef6);
+}

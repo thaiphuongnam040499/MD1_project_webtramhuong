@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ hàng của bạn</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!--        <img class="navbar_logo" src="./img/logotramhuong.jpeg" alt="">-->
+    <a class="navbar-brand" href="index.html">Trầm hương Phúc Trạch</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Giới thiệu</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Sản Phẩm
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Vòng trầm hương</a></li>
+            <li><a class="dropdown-item" href="#">Chuỗi hạt trầm hương</a></li>
+            <li><a class="dropdown-item" href="#">Hương trầm</a></li>
+            <li><a class="dropdown-item" href="#">Trầm hương mỹ nghệ</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Liên hệ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div  class="container" style="margin-top: 100px">
+      <table class="table table-product">
+        <thead>
+        <tr class="table-primary">
+          <th scope="col">STT</th>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Giá </th>
+          <th scope="col">Thành tiền</th>
+          <th scope="col">Xóa</th>
+        </tr>
+        </thead>
+        <tbody id="myCart" style="background-color: white">
+
+        </tbody>
+      </table>
+</div>
+<script>
+  let cart = JSON.parse(localStorage.getItem('giohang'))
+  function showMyCart() {
+    let cartInformation = "";
+    let tong = 0
+    let total;
+    for (let i = 0; i < cart.length; i++) {
+      total = parseInt(cart[i][2]) * parseInt(cart[i][3])
+      tong += total
+      cartInformation += `<tr>
+        <td scope="row">${i + 1}</td>
+        <td><img id="cart-img" src="${cart[i][0]}" alt=""></td>
+        <td>${cart[i][1]}</td>
+         <td>
+         <button onclick="plus(${cart[i].id})"><i class="bi bi-plus"></i></button>
+         <span id="quantity">${cart[i][2]}</span>
+         <button onclick="minus(${cart[i].id})"><i class="bi bi-dash"></i></button>
+         </td>
+        <td>${cart[i][3]}</td>
+        <td>
+        <div>${total}</div>
+        </td>
+        <td><button onclick="deleteCart(${i})"><i class="bi bi-trash3-fill"></i></button></td>
+    </tr>`
+    }
+    cartInformation += `   <tr>
+        <th colSpan="5">Tổng đơn hàng</th>
+        <th>
+            <div>${tong}</div>
+        </th>
+        <th><a href="">Thanh Toán</a></th>
+    </tr>`
+    document.querySelector('#myCart').innerHTML = cartInformation;
+  }showMyCart()
+  function deleteCart(index) {
+    cart.splice(index, 1)
+    showMyCart()
+    localStorage.setItem('giohang' , JSON.stringify(cart))
+  }
+  function updateQ(id,val){
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].id==id){
+        cart[i][2] = val
+        break
+      }
+    }
+    localStorage.setItem('giohang' , JSON.stringify(cart))
+  }showMyCart()
+  let count = document.getElementById('quantity')
+  function minus(id) {
+      let count1 = count.innerText
+    if (count1<=1){
+      return
+    }else {
+      count1--
+      document.getElementById('quantity').innerText=count1
+      updateQ(id,count1)
+    }
+  }
+  function plus(id) {
+    let count1 = count.innerText
+    count1++
+    document.getElementById('quantity').innerText = count1
+    updateQ(id,count1)
+  }
+</script>
+<section style="position: fixed; bottom: 0; left: 0; right: 0;">
+  <!-- Footer -->
+  <footer class="bg-secondary">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Trầm hương Phúc Trạch</h5>
+          <p class="address">
+            <i class="bi bi-house"></i>
+            Trụ sở: Phúc Trạch - Hương Khê - Hà Tĩnh
+          </p>
+          <p class="address">
+            <i class="bi bi-telephone-fill"></i>
+            098686868
+          </p>
+          <p class="address">
+            <i class="bi bi-envelope-at"></i>
+            tramhuongphuctrach@gmail.com
+          </p>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Chính sách và quy định</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="list-items">Chính sách đổi trả</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Chính sách bảo mật</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Chính sách giao hàng</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Phương thức thanh toán</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-0">Danh mục chính</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="index.html" class="list-items">Trang chủ</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Giới thiêu</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Sản phẩm</a>
+            </li>
+            <li>
+              <a href="#!" class="list-items">Liên hệ</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="list-items" href="">ThaiNamDev</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>
+</body>
+</html>

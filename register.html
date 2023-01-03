@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng kí</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="user.js"></script>
+    <style>
+        body{
+            background-image:  url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
+        }
+    </style>
+</head>
+<body>
+<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+                            <form>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="inputUserName">User Name</label>
+                                    <input oninput="validate()" type="text" id="inputUserName"
+                                           class="form-control form-control-lg"/>
+                                    <p class="text-danger" id="failUsername"></p>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="inputEmail">Your Email</label>
+                                    <input oninput="validate()" type="email" id="inputEmail"
+                                           class="form-control form-control-lg"/>
+                                    <p class="text-danger" id="failEmail"></p>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="inputPassword">Password</label>
+                                    <input oninput="validate()" type="password" id="inputPassword"
+                                           class="form-control form-control-lg"/>
+                                    <p class="text-danger" id="failPassword"></p>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="inputRePassword">Repeat your password</label>
+                                    <input oninput="validate()" type="password" id="inputRePassword"
+                                           class="form-control form-control-lg"/>
+                                    <p class="text-danger" id="failRePassword"></p>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" onclick="submitData()" class="btn btn-info submitData">Register</button>
+                                </div>
+                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="login.html" class="fw-bold text-body"><u>Login here</u></a></p>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    let userNameInput = document.querySelector('#inputUserName')
+    let emailInput = document.querySelector('#inputEmail')
+    let passwordInput = document.querySelector('#inputPassword')
+    let rePasswordInput = document.querySelector('#inputRePassword')
+    let submit = document.querySelector(".submitData")
+    let isCheck;
+    let user;
+    // localStogate
+    let arr = JSON.parse(localStorage.getItem('listUser'))
+    if (arr == null) {
+        arr = [];
+    }
+
+    function validate() {
+        let check = true
+        let username = userNameInput.value;
+        let email = emailInput.value;
+        let password = passwordInput.value;
+        let rePassword = rePasswordInput.value;
+        const EMAIL_PATTERN = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (username.trim() === '') {
+            document.querySelector('#failUsername').innerHTML = 'Không được để trống!';
+            check = false;
+        } else if (username.length < 6) {
+            document.querySelector('#failUsername').innerHTML = 'Tên đăng nhập phải có ít nhất 6 kí tự!'
+            check = false;
+        } else if (checkUserNameExist(username)) {
+            document.querySelector('#failUsername').innerHTML = 'Tên đăng nhập đã tồn tại, vui lòng chọn tên khác!'
+            check = false;
+        } else {
+            document.querySelector('#failUsername').innerHTML = ''
+        }
+        if (email.trim() === '') {
+            document.querySelector('#failEmail').innerHTML = 'không được để trống!'
+            check = false;
+        } else if (!EMAIL_PATTERN.test(email)) {
+            document.querySelector('#failEmail').innerHTML = 'Email không đúng định dạng, vui lòng kiểm tra địa chỉ email của bạn!'
+            check = false;
+        } else if (checkEmailExist(email)) {
+            document.querySelector('#failEmail').innerHTML = 'Email đã tồn tại, vui lòng ch email khác!'
+            check = false;
+        } else {
+            document.querySelector('#failEmail').innerHTML = ''
+        }
+        if (password.trim() === '') {
+            document.querySelector('#failPassword').innerHTML = 'Không được để trống!';
+            check = false;
+        } else if (username.length < 6) {
+            document.querySelector('#failPassword').innerHTML = 'Mật khẩu phải có ít nhất 6 kí tự!'
+            check = false;
+        } else {
+            document.querySelector('#failPassword').innerHTML = ''
+        }
+        if (rePassword !== password) {
+            document.querySelector('#failRePassword').innerHTML = 'Mật khẩu không trùng khớp! vui lòng nhập lại mật khẩu!'
+            check = false;
+        } else {
+            document.querySelector('#failRePassword').innerHTML = ''
+        }
+        if (check) {
+            isCheck = true
+            user = new User(username,email,password)
+        } else {
+            isCheck = false
+        }
+    }
+
+    // hàm submitData
+    function submitData() {
+        if (isCheck) {
+            arr.push(user)
+            localStorage.setItem('listUser', JSON.stringify(arr))
+            location.href = 'login.html'
+        }
+    }
+
+    function checkUserNameExist(userNameCheck) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].username === userNameCheck) {
+                return true;
+                break;
+            }
+        }
+        return false
+    }
+
+    function checkEmailExist(emailCheck) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].email === emailCheck) {
+                return true;
+                break;
+            }
+        }
+        return false
+    }
+</script>
+</body>
+</html>
