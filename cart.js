@@ -8,27 +8,32 @@ if (cart == null){
     cart = new Array()
 }
     function addToCart(x) {
-    let card = x.parentElement.children
-    let img = card[0].children[0].src
-    let productName = card[1].innerText
-    let information = parseInt(card[4].value)
-    let price = card[2].innerText
-    let product = new Array(img, productName, information,price)
-        let check = true
-        for (let i = 0; i < cart.length; i++) {
-            if (cart[i][1]==productName){
-                check= false
-                information += cart[i][2]
-                cart[i][2] = information
-                break;
+        if (user == null){
+            alert('hãy đăng nhập để mua sản phẩm')
+            location.href= 'login.html'
+        }else {
+            let card = x.parentElement.children
+            let img = card[0].children[0].src
+            let productName = card[1].innerText
+            let information = parseInt(card[4].value)
+            let price = card[2].innerText
+            let product = new Array(img, productName, information, price)
+            let check = true
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i][1] == productName) {
+                    check = false
+                    information += cart[i][2]
+                    cart[i][2] = information
+                    break;
+                }
             }
+            if (check) {
+                cart.push(product)
+            }
+            showCount()
+            showMyCart()
+            localStorage.setItem("giohang", JSON.stringify(cart))
         }
-        if (check){
-            cart.push(product)
-        }
-    showCount()
-    showMyCart()
-        localStorage.setItem("giohang", JSON.stringify(cart))
 }
     function showCount() {
     document.querySelector('#count').innerHTML = cart.length
