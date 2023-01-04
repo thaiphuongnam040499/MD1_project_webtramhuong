@@ -4,9 +4,9 @@
     let cart = JSON.parse(localStorage.getItem('giohang'));
 showMyCart()
 showCount()
-
+if (cart == null){
     cart = new Array()
-
+}
     function addToCart(x) {
     let card = x.parentElement.children
     let img = card[0].children[0].src
