@@ -79,15 +79,15 @@
         <td><img id="cart-img" src="${cart[i][0]}" alt=""></td>
         <td>${cart[i][1]}</td>
          <td>
-         <button onclick="minus(this,${i})"><i class="bi bi-dash"></i></button>
+         <button class="btn_quantity" onclick="minus(this,${i})"><i class="bi bi-dash"></i></button>
          <span id="quantity">${cart[i][2]}</span>
-         <button onclick="plus(this,${i})"><i class="bi bi-plus"></i></button>
+         <button class="btn_quantity" onclick="plus(this,${i})"><i class="bi bi-plus"></i></button>
          </td>
         <td>${cart[i][3]}</td>
         <td>
         <div>${total}</div>
         </td>
-        <td><button onclick="deleteCart(${i})"><i class="bi bi-trash3-fill"></i></button></td>
+        <td><button class="btn_cart" onclick="deleteCart(${i})"><i class="bi bi-trash3-fill"></i></button></td>
     </tr>`
     }
     cartInformation += `   <tr>
@@ -95,7 +95,7 @@
         <th>
             <div>${tong}</div>
         </th>
-        <th><a href="">Thanh Toán</a></th>
+        <th><a href=""><button class="btn btn-primary">Thanh Toán</button></a></th>
     </tr>`
     document.querySelector('#myCart').innerHTML = cartInformation;
   }showMyCart()
@@ -124,8 +124,6 @@
     }
   }
   function plus(btnplus,id) {
-    console.log(btnplus)
-    console.log( btnplus.parentElement.querySelector('#quantity'))
     let count1 = btnplus.parentElement.querySelector('#quantity').innerText
     count1++
     btnplus.parentElement.querySelector('#quantity').innerText = count1

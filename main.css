@@ -101,7 +101,6 @@ body{
 }
 .home-product{
     margin-bottom: 12px;
-
 }
 /*#product{*/
 /*    background-color: white;*/
@@ -162,4 +161,14 @@ footer{
 .btn_product{
     width: 100%;
     margin: 6px 0px;
+}
+/*upload cart*/
+.btn_quantity{
+    border-radius: 5px;
+    border: 1px solid white;
+}
+.btn_cart{
+    border: 1px solid #f56f6f;
+    border-radius: 5px;
+    background-color: #F56F6FFF;
 }
