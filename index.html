@@ -171,8 +171,8 @@
                     </div>
                     <h5 class="card-title">${listProduct[i].nameProduct}</h5>
                     <p class="card-text">${listProduct[i].price}</p>
-                    <input type="number" name="" class="quantity" min="1" value="1">
-                    <button onclick="addToCart(this)" type="button" class="btn btn-warning">Buy</button>
+                    <span>Số lượng</span><input type="number" name="" class="quantity" min="1" value="1">
+                    <button onclick="addToCart(this)" type="button" class="btn btn-warning btn_product">Thêm vào giỏ hàng</button>
                 </div>`
                     }
                     document.querySelector("#product").innerHTML = drawTable

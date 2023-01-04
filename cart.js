@@ -12,7 +12,7 @@ console.log(cart)
     let card = x.parentElement.children
     let img = card[0].children[0].src
     let productName = card[1].innerText
-    let information = parseInt(card[3].value)
+    let information = parseInt(card[4].value)
     let price = card[2].innerText
     let product = new Array(img, productName, information,price)
         let check = true

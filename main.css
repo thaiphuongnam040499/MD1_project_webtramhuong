@@ -123,7 +123,9 @@ body{
 }
 .quantity{
     width: 40px;
-    /*margin-left: 150px;*/
+    margin-left: 6px;
+    border: 2px solid #eedb93;
+    border-radius: 5px;
 }
 .carousel-item{
     height: 500px;
@@ -156,4 +158,8 @@ body{
 }
 footer{
     background-image: linear-gradient(0, #d0f5eb, #d3aef6);
+}
+.btn_product{
+    width: 100%;
+    margin: 6px 0px;
 }
