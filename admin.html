@@ -210,6 +210,7 @@
                             <th scope="col">Tên người dùng</th>
                             <th scope="col">Địa chỉ email</th>
                             <th scope="col">Password</th>
+                            <th scope="col">Delete</th>
                         </tr>
                         <tbody id="listUser" style="background-color: white">
 
@@ -226,6 +227,7 @@
                                         <td>${listUser[i].username}</td>
                                         <td>${listUser[i].email}</td>
                                         <td>${listUser[i].password}</td>
+                                         <td><button style="background-color: #fa4242; border-radius: 2px;border: 1px solid #f34545" onclick="deleteUser(${i})"><i class="bi bi-trash3-fill"></i></button></td>
                                         </tr>`
                                 }
                             document.getElementById('listUser').innerHTML = list
@@ -238,6 +240,11 @@
                                 document.querySelector('.showListUser').style.display = "block"
 
                             }
+                        }
+                        function deleteUser(index) {
+                            listUser.splice(index,1)
+                            localStorage.setItem('listUser', JSON.stringify(listUser))
+                            showListUser()
                         }
                     </script>
                 </div>
