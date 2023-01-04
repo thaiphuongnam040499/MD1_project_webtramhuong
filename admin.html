@@ -79,7 +79,7 @@
             <!--end-->
             <div  class="container " >
                 <div class="row showList" >
-                    <div class="rounded col-12" style="background-color: #f3cfc5; text-align: center; margin: 20px">
+                    <div class="rounded col-12" style="background-color: #f3cfc5; text-align: center; margin: 20px"  id="list-product">
                         <h3 style="color: #311818">Thêm sản phẩm vào cửa hàng</h3>
                         <!--update image-->
                         <progress value="0" max="100" id="uploader">0%</progress>
@@ -112,8 +112,24 @@
 
                             </tbody>
                         </table>
+
+                    </div>
+                </div>
+                <div class="showListUser">
+                    <table class="table table-product">
+                        <tr class="table-primary">
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên người dùng</th>
+                            <th scope="col">Địa chỉ email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        <tbody id="listUser" style="background-color: white">
+
+                        </tbody>
+                    </table>
                         <script>
-                            document.querySelector('.showList').style.display = 'none'
+                            document.getElementById('list-product').style.display='none'
                             let listProduct = JSON.parse(localStorage.getItem("listProduct"))
                             if (listProduct === null) {
                                 listProduct = [];
@@ -191,33 +207,15 @@
                                 showListProduct()
                             }
                             function showList(){
-                                    let x = document.querySelector('.showList');
-                                    if (x.style.display == "block") {
-                                        document.querySelector('.showList').style.display = "none"
-                                    } else {
-                                        document.querySelector('.showList').style.display = "block"
+                                document.getElementById('list-product').style.display='block'
+                                document.querySelector('.showListUser').style.display = "none"
 
-                                    }
+
                             }
                         </script>
 
-                    </div>
-                </div>
-                <div class="showListUser">
-                    <table class="table table-product">
-                        <tr class="table-primary">
-                            <th scope="col">STT</th>
-                            <th scope="col">Tên người dùng</th>
-                            <th scope="col">Địa chỉ email</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                        <tbody id="listUser" style="background-color: white">
-
-                        </tbody>
-                    </table>
                     <script>
-                        document.querySelector('.showListUser').style.display = 'none'
+                        document.querySelector('.showListUser').style.display = "none"
                         let listUser = JSON.parse(localStorage.getItem('listUser'))
                         function showListUser(){
                             let list = ''
@@ -233,13 +231,8 @@
                             document.getElementById('listUser').innerHTML = list
                             }showListUser()
                         function list(){
-                            let x = document.querySelector('.showListUser');
-                            if (x.style.display == "block") {
-                                document.querySelector('.showListUser').style.display = "none"
-                            } else {
-                                document.querySelector('.showListUser').style.display = "block"
-
-                            }
+                            document.getElementById('list-product').style.display='none'
+                            document.querySelector('.showListUser').style.display = "block"
                         }
                         function deleteUser(index) {
                             listUser.splice(index,1)
