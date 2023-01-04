@@ -79,9 +79,9 @@
         <td><img id="cart-img" src="${cart[i][0]}" alt=""></td>
         <td>${cart[i][1]}</td>
          <td>
-         <button onclick="plus(${cart[i].id})"><i class="bi bi-plus"></i></button>
+         <button onclick="minus(this,${i})"><i class="bi bi-dash"></i></button>
          <span id="quantity">${cart[i][2]}</span>
-         <button onclick="minus(${cart[i].id})"><i class="bi bi-dash"></i></button>
+         <button onclick="plus(this,${i})"><i class="bi bi-plus"></i></button>
          </td>
         <td>${cart[i][3]}</td>
         <td>
@@ -106,28 +106,29 @@
   }
   function updateQ(id,val){
     for (let i = 0; i < cart.length; i++) {
-      if (cart[i].id==id){
+      if (i==id){
         cart[i][2] = val
         break
       }
-    }
+    }showMyCart()
     localStorage.setItem('giohang' , JSON.stringify(cart))
   }showMyCart()
-  let count = document.getElementById('quantity')
-  function minus(id) {
-      let count1 = count.innerText
+  function minus(btnminus,id) {
+    let count1 = btnminus.parentElement.querySelector('#quantity').innerText
     if (count1<=1){
       return
     }else {
       count1--
-      document.getElementById('quantity').innerText=count1
+      btnminus.parentElement.querySelector('#quantity').innerText=count1
       updateQ(id,count1)
     }
   }
-  function plus(id) {
-    let count1 = count.innerText
+  function plus(btnplus,id) {
+    console.log(btnplus)
+    console.log( btnplus.parentElement.querySelector('#quantity'))
+    let count1 = btnplus.parentElement.querySelector('#quantity').innerText
     count1++
-    document.getElementById('quantity').innerText = count1
+    btnplus.parentElement.querySelector('#quantity').innerText = count1
     updateQ(id,count1)
   }
 </script>

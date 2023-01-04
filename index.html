@@ -49,7 +49,28 @@
                     <a class="nav-link" href="#">Liên hệ</a>
                 </li>
             </ul>
+            <div class="cart">
+                <button onclick="showCart()" class="cart-button"><i class="bi bi-bag"></i></button>
+                <span id="count">0</span>
+                <div class="showCart">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Thành tiền</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody id="myCart">
 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <form class="d-flex">
                 <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button onclick="actionSearch()" class="btn btn-outline-success" type="button">Search</button>
@@ -132,28 +153,7 @@
                 <li><a class="dropdown-item" href="#">Từ cao đến thấp</a></li>
             </ul>
         </div>
-        <div class="cart">
-            <button onclick="showCart()" class="cart-button"><i class="bi bi-bag"></i></button>
-            <span id="count">0</span>
-            <div class="showCart">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Sản phẩm</th>
-                        <th scope="col">Tên sản phẩm</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Thành tiền</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody id="myCart">
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
     <!--product-->
     <div class="home-product">
@@ -171,7 +171,7 @@
                     </div>
                     <h5 class="card-title">${listProduct[i].nameProduct}</h5>
                     <p class="card-text">${listProduct[i].price}</p>
-                    <i class="bi bi-plus"></i><input type="number" name="" class="quantity" value="1"><i class="bi bi-dash"></i>
+                    <input type="number" name="" class="quantity" min="1" value="1">
                     <button onclick="addToCart(this)" type="button" class="btn btn-warning">Buy</button>
                 </div>`
                     }

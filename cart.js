@@ -1,12 +1,18 @@
 <!--script cart-->
 
     document.querySelector('.showCart').style.display = "none"
-    let cart = new Array();
+    let cart = JSON.parse(localStorage.getItem('giohang'));
+showMyCart()
+showCount()
+if (cart == null){
+    cart = new Array()
+}
+console.log(cart)
     function addToCart(x) {
     let card = x.parentElement.children
     let img = card[0].children[0].src
     let productName = card[1].innerText
-    let information = parseInt(card[4].value)
+    let information = parseInt(card[3].value)
     let price = card[2].innerText
     let product = new Array(img, productName, information,price)
         let check = true
@@ -46,7 +52,7 @@
         <td>
         <div>${total}</div>
         </td>
-        <td><button onclick="deleteCart(${i})"><i class="bi bi-trash3-fill"></i></button></td>
+        <td><button style="background-color: #fa4242; border-radius: 2px;border: 1px solid #f34545" onclick="deleteCart(${i})"><i class="bi bi-trash3-fill"></i></button></td>
     </tr>`
 }
     cartInformation += `   <tr>
@@ -54,7 +60,7 @@
         <th>
             <div>${tong}</div>
         </th>
-        <th><a href="./upload%20cart.html"><button >Xem giỏ hàng</button></a></th>
+        <th><a href="./upload%20cart.html"><button class="btn btn-warning" >Xem giỏ hàng</button></a></th>
     </tr>`
     document.querySelector('#myCart').innerHTML = cartInformation;
 }
@@ -67,14 +73,16 @@
     document.querySelector('.showCart').style.display = "block"
 
 }
-    showMyCart()
+
 }
     // updateInformation
 
     // deleteCart
     function deleteCart(index) {
     cart.splice(index,1)
+        localStorage.setItem('giohang' , JSON.stringify(cart))
     showMyCart()
     showCount()
+
 }
 

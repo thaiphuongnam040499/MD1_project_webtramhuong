@@ -30,7 +30,7 @@
                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Quản lý</span> </a>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Cửa hàng</span></a>
+                                <a href="#" onclick="showList()" class="nav-link px-0"> <span class="d-none d-sm-inline">Cửa hàng</span></a>
                             </li>
 <!--                            <li>-->
 <!--                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Giỏ hàng</span></a>-->
@@ -39,23 +39,9 @@
                     </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i></i> <span class="ms-1 d-none d-sm-inline">Quản lí người dùng</span></a>
+                            <i class="fs-4 bi-people"></i></i> <span onclick="list()" class="ms-1 d-none d-sm-inline">Quản lí người dùng</span></a>
                     </li>
                 </ul>
-                <hr>
-                <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">loser</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="col py-3">
@@ -92,7 +78,7 @@
             </div>
             <!--end-->
             <div  class="container " >
-                <div class="row" >
+                <div class="row showList" >
                     <div class="rounded col-12" style="background-color: #f3cfc5; text-align: center; margin: 20px">
                         <h3 style="color: #311818">Thêm sản phẩm vào cửa hàng</h3>
                         <!--update image-->
@@ -127,8 +113,8 @@
                             </tbody>
                         </table>
                         <script>
+                            document.querySelector('.showList').style.display = 'none'
                             let listProduct = JSON.parse(localStorage.getItem("listProduct"))
-                            let listSearch = [];
                             if (listProduct === null) {
                                 listProduct = [];
                             }
@@ -204,36 +190,56 @@
                                 localStorage.setItem("listProduct", JSON.stringify(listProduct))
                                 showListProduct()
                             }
-                            // search
-                            function actionSearch(){
-                                let search = document.getElementById('search').value
-                                if (search.trim()===''){
-                                    showListProduct()
-                                }else {
-                                    for (let i = 0; i < listProduct.length; i++) {
-                                        if (listProduct[i].nameProduct.toLowerCase().includes(search.toLowerCase())){
-                                            listSearch.push(listProduct[i])
-                                        }
+                            function showList(){
+                                    let x = document.querySelector('.showList');
+                                    if (x.style.display == "block") {
+                                        document.querySelector('.showList').style.display = "none"
+                                    } else {
+                                        document.querySelector('.showList').style.display = "block"
+
                                     }
-                                }showListSearch()
-                            }
-                            function showListSearch(){
-                                let drawTable = '';
-                                for (let i = 0; i < listSearch.length; i++) {
-                                    drawTable += `<tr>
-                            <td>${i + 1}</td>
-                            <td>${listSearch[i].image}</td>
-                            <td>${listSearch[i].nameProduct}</td>
-                            <td>${listSearch[i].price}</td>
-                            <td><button class="btn btn-primery" onclick="showUpdateModal(${listSearch[i].id})" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="${listSearch.nameProduct}"><i class="bi bi-pen"></button></td>
-                            <td><button class="btn btn-primery" onclick="deleteProduct(${i})" id=""><i class="bi bi-trash3-fill"></button></td>
-                          </tr>`
-                                }
-                                document.querySelector(".draw-table").innerHTML = drawTable
                             }
                         </script>
 
                     </div>
+                </div>
+                <div class="showListUser">
+                    <table class="table table-product">
+                        <tr class="table-primary">
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên người dùng</th>
+                            <th scope="col">Địa chỉ email</th>
+                            <th scope="col">Password</th>
+                        </tr>
+                        <tbody id="listUser" style="background-color: white">
+
+                        </tbody>
+                    </table>
+                    <script>
+                        document.querySelector('.showListUser').style.display = 'none'
+                        let listUser = JSON.parse(localStorage.getItem('listUser'))
+                        function showListUser(){
+                            let list = ''
+                            for (let i = 0; i < listUser.length; i++) {
+                                list += `<tr>
+                                        <td scope="row">${i + 1}</td>
+                                        <td>${listUser[i].username}</td>
+                                        <td>${listUser[i].email}</td>
+                                        <td>${listUser[i].password}</td>
+                                        </tr>`
+                                }
+                            document.getElementById('listUser').innerHTML = list
+                            }showListUser()
+                        function list(){
+                            let x = document.querySelector('.showListUser');
+                            if (x.style.display == "block") {
+                                document.querySelector('.showListUser').style.display = "none"
+                            } else {
+                                document.querySelector('.showListUser').style.display = "block"
+
+                            }
+                        }
+                    </script>
                 </div>
             </div>
         </div>
